@@ -1,0 +1,6 @@
+^build/
+
+syntax: glob
+*.mode1
+*.pbxuser
+*~.nib
