@@ -9,9 +9,17 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface Controller : NSWindowController {
+@interface Controller : NSObject {
 
+	IBOutlet NSMenu *appMenu;
+	IBOutlet NSPanel *prefs;
+
+	NSArray *currentAppsArray;
+	NSMutableSet *ignored;
 	NSMutableDictionary *currentApps;
+	NSMutableDictionary *activityTimes;
+
+	double maxAge;
 }
 
 -(NSArray*)currentApps;
