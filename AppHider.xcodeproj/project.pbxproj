@@ -11,6 +11,7 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		DA1B352A0B86EC4500E2D853 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = DA1B35280B86EC4500E2D853 /* Credits.html */; };
 		DA2439D60B86D597007A594A /* AppTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2439D50B86D597007A594A /* AppTracker.m */; };
 		DA57583E0B863613000D83CD /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = DA57583D0B863613000D83CD /* Controller.m */; };
 /* End PBXBuildFile section */
@@ -26,6 +27,7 @@
 		32CA4F630368D1EE00C91783 /* AppHider_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppHider_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* AppHider.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppHider.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA1B35290B86EC4500E2D853 /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.html; name = English; path = English.lproj/Credits.html; sourceTree = "<group>"; };
 		DA2439D40B86D597007A594A /* AppTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppTracker.h; sourceTree = "<group>"; };
 		DA2439D50B86D597007A594A /* AppTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppTracker.m; sourceTree = "<group>"; };
 		DA57583C0B863613000D83CD /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DA1B35280B86EC4500E2D853 /* Credits.html */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
@@ -164,6 +167,7 @@
 			files = (
 				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				DA1B352A0B86EC4500E2D853 /* Credits.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +201,14 @@
 				29B97319FDCFA39411CA2CEA /* English */,
 			);
 			name = MainMenu.nib;
+			sourceTree = "<group>";
+		};
+		DA1B35280B86EC4500E2D853 /* Credits.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA1B35290B86EC4500E2D853 /* English */,
+			);
+			name = Credits.html;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

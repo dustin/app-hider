@@ -4,3 +4,4 @@ syntax: glob
 *.mode1
 *.pbxuser
 *~.nib
+.DS_Store
