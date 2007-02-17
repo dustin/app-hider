@@ -1,9 +1,10 @@
 {
     IBClasses = (
+        {CLASS = AppTracker; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
             CLASS = Controller; 
             LANGUAGE = ObjC; 
-            OUTLETS = {appMenu = NSMenu; prefs = NSPanel; }; 
+            OUTLETS = {appMenu = NSMenu; prefs = NSPanel; tracker = AppTracker; }; 
             SUPERCLASS = NSObject; 
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }

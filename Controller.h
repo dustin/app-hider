@@ -7,21 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import <AppTracker.h>
 
 @interface Controller : NSObject {
 
 	IBOutlet NSMenu *appMenu;
 	IBOutlet NSPanel *prefs;
 
-	NSArray *currentAppsArray;
-	NSMutableSet *ignored;
-	NSMutableDictionary *currentApps;
-	NSMutableDictionary *activityTimes;
-
-	double maxAge;
+	IBOutlet AppTracker *tracker;
 }
-
--(NSArray*)currentApps;
 
 @end
