@@ -23,12 +23,45 @@
 	}
 }
 
+- (NSImage*)iconForApplication: (NSDictionary *)application
+{
+	// get the icon
+	NSImage *applicationIcon = [[NSWorkspace sharedWorkspace]
+		iconForFile: [application objectForKey:@"NSApplicationPath"]];
+
+	NSSize size={20, 20};
+    if(!NSEqualSizes([applicationIcon size], size)) {
+		[applicationIcon setSize: size];
+	}
+    // done, return it 
+    return applicationIcon;
+}
+
 -(void)rebuildMenu {
 	// Remove existing items -- except quit at the bottom.
 	while([appMenu numberOfItems] > 0) {
 		[appMenu removeItemAtIndex: 0];
 	}
 
+	// About
+	NSMenuItem *aboutItem=[[NSMenuItem alloc]
+		initWithTitle: @"About App Hider"
+		action:@selector(orderFrontStandardAboutPanel:) keyEquivalent:@""];
+	[aboutItem setTarget: NSApp];
+	[aboutItem setEnabled:YES];
+	[appMenu addItem: aboutItem];
+	[aboutItem release];
+
+	[appMenu addItem: [NSMenuItem separatorItem]];
+
+	// Exclude header
+	NSMenuItem *excludeItem=[[NSMenuItem alloc]
+		initWithTitle: @"Exclude Apps:"
+		action:@selector(makeKeyAndOrderFront:) keyEquivalent:@""];
+	[appMenu addItem: excludeItem];
+	[excludeItem release];
+
+	// Add an item for each application
 	NSEnumerator *e = [[tracker currentApps] objectEnumerator];
     id anAppDict;
 	int i=0;
@@ -39,6 +72,8 @@
 		[item setEnabled:YES];
 		[item setState: [tracker isIgnored:anAppDict] ? NSOnState : NSOffState];
 		[item setTarget:self];
+		[item setImage:[self iconForApplication:anAppDict]];
+		[item setIndentationLevel:1];
 		[item setTag:i++];
 		[appMenu addItem:item];
 		[item release];
