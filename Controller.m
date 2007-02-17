@@ -93,6 +93,8 @@
 		[ignored removeObject: [p valueForKey:@"NSApplicationPath"]];
 		[sender setState: NSOffState];
 	}
+	[[NSUserDefaults standardUserDefaults]
+		setObject:[ignored allObjects] forKey:@"ignored"];
 }
 
 -(void)updateCurrentAppsArray {
@@ -177,11 +179,26 @@
 	[newItem retain];
 }
 
+-(void)setDefaultDefaults {
+	[[NSUserDefaults standardUserDefaults]
+		registerDefaults: [NSDictionary dictionaryWithObjectsAndKeys:
+			[NSNumber numberWithFloat:180.0], @"freq",
+			[NSArray array], @"ignored", nil, nil]];
+	// This looks dumb, but preferences doesn't work correctly without it
+	[[NSUserDefaults standardUserDefaults]
+		setFloat:[[NSUserDefaults standardUserDefaults] floatForKey:@"freq"]
+		forKey:@"freq"];
+}
+
 -(void)awakeFromNib {
-	maxAge=60.0;
+	[self setDefaultDefaults];
+	maxAge=(double)[[NSUserDefaults standardUserDefaults] floatForKey:@"freq"];
+	NSLog(@"maxAge=%f", maxAge);
+
 	currentApps = [[NSMutableDictionary alloc] initWithCapacity:100];
 	activityTimes = [[NSMutableDictionary alloc] initWithCapacity:100];
 	ignored = [[NSMutableSet alloc] initWithCapacity:100];
+	[ignored addObjectsFromArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"ignored"]];
 
 	[self addObserver:self forKeyPath:@"currentApps" options:NSKeyValueObservingOptionNew context:nil];
 
