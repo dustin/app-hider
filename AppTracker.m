@@ -37,7 +37,12 @@
 -(void)appLaunched:(NSNotification*)notification {
 	[self willChangeValueForKey:@"currentApps"];
 	id anAppDict=[notification userInfo];
+
 	[currentApps setObject:anAppDict forKey:[anAppDict valueForKey:@"NSApplicationPath"]];
+	NSDate *now=[[NSDate alloc] init];
+	[activityTimes setObject:now forKey:[anAppDict valueForKey:@"NSApplicationPath"]];
+	[now release];
+
 	[self updateArray];
 	[self didChangeValueForKey:@"currentApps"];
 }
@@ -45,7 +50,10 @@
 -(void)appQuit:(NSNotification*)notification {
 	[self willChangeValueForKey:@"currentApps"];
 	id anAppDict=[notification userInfo];
+
 	[currentApps removeObjectForKey:[anAppDict valueForKey:@"NSApplicationPath"]];
+	[activityTimes removeObjectForKey:[anAppDict valueForKey:@"NSApplicationPath"]];
+
 	[self updateArray];
 	[self didChangeValueForKey:@"currentApps"];
 }
