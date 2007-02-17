@@ -93,7 +93,7 @@
 
 	// Quit 
 	NSMenuItem *quitItem=[[NSMenuItem alloc]
-		initWithTitle: @"Quit"
+		initWithTitle: @"Quit App Hider"
 		action:@selector(terminate:) keyEquivalent:@""];
 	[quitItem setTarget: NSApp];
 	[quitItem setEnabled:YES];
@@ -109,7 +109,7 @@
 
 -(void)initStatusBar {
 	NSStatusItem *newItem=[[NSStatusBar systemStatusBar] statusItemWithLength: 40.0];
-	[newItem setTitle: @"App Hider"];
+	[newItem setTitle: @"hide"];
 	[newItem setMenu: appMenu];
 	[newItem setEnabled:YES];
 	[newItem retain];
@@ -141,6 +141,13 @@
 	[[[NSWorkspace sharedWorkspace] notificationCenter]
 		addObserver:tracker selector:@selector(appQuit:)
 		name:NSWorkspaceDidTerminateApplicationNotification object:nil];
+
+	// Ask the menu to be built out a second after we start.  I don't think
+	// I can control load order coming out of the NIB, and the notifications
+	// might not come through at the right time, so just blast one through
+	// after we've had time to load.
+	[NSTimer scheduledTimerWithTimeInterval:1.0 target:self
+		selector:@selector(rebuildMenu) userInfo:nil repeats:NO];
 }
 
 @end
