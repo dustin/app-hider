@@ -112,6 +112,7 @@
 	[newItem setTitle: @"hide"];
 	[newItem setMenu: appMenu];
 	[newItem setEnabled:YES];
+	[newItem setHighlightMode:YES];
 	[newItem retain];
 }
 
