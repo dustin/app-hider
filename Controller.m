@@ -50,7 +50,7 @@
 	// Prefs
 	NSMenuItem *prefsItem=[[NSMenuItem alloc]
 		initWithTitle: @"Preferences"
-		action:@selector(makeKeyAndOrderFront:) keyEquivalent:@";"];
+		action:@selector(makeKeyAndOrderFront:) keyEquivalent:@""];
 	[prefsItem setTarget: prefs];
 	[prefsItem setEnabled:YES];
 	[appMenu addItem: prefsItem];
