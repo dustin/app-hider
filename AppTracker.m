@@ -74,14 +74,14 @@
 }
 
 -(void)checkCurrentApp:(NSTimer*)timer {
+	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
 	NSDictionary *active=[[NSWorkspace sharedWorkspace] activeApplication];
 	// When this app launches, active is nil.
 	if(active != nil) {
-		NSDate *now=[[NSDate alloc] init];
-		[activityTimes setObject:now forKey:[active valueForKey:@"NSApplicationPath"]];
-		[now release];
+		[activityTimes setObject:[NSDate date] forKey:[active valueForKey:@"NSApplicationPath"]];
 	}
 	// NSLog(@"%@ is active", [active valueForKey:@"NSApplicationPath"]);
+	[pool release];
 }
 
 -(void)hideApp:(NSDictionary*)app {
@@ -97,6 +97,8 @@
 }
 
 -(void)checkIdleApps:(NSTimer*)timer {
+	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
+
 	double maxAge=(double)[[NSUserDefaults standardUserDefaults] floatForKey:@"freq"];
 	NSEnumerator *enumerator = [activityTimes keyEnumerator];
     id nm;
@@ -114,6 +116,8 @@
 			}
 		}
 	}
+
+	[pool release];
 }
 
 -(void)updateDefaults {
