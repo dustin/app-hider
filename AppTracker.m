@@ -15,7 +15,7 @@
 	NSSortDescriptor *sdesc=[[NSSortDescriptor alloc]
 		initWithKey:@"NSApplicationName" ascending:YES
 		selector:@selector(caseInsensitiveCompare:)];
-	[[sdesc retain] autorelease];
+	[sdesc autorelease];
 	return [NSArray arrayWithObject: sdesc];
 }
 
@@ -24,7 +24,7 @@
 }
 
 -(void)updateArray {
-		if(currentAppsArray != nil) {
+	if(currentAppsArray != nil) {
 		[currentAppsArray release];
 	}
 	NSMutableArray *arry=[[NSMutableArray alloc] initWithCapacity: [currentApps count]];

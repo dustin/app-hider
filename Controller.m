@@ -38,6 +38,7 @@
 }
 
 -(void)rebuildMenu {
+	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
 	// Remove existing items -- except quit at the bottom.
 	while([appMenu numberOfItems] > 0) {
 		[appMenu removeItemAtIndex: 0];
@@ -99,6 +100,8 @@
 	[quitItem setEnabled:YES];
 	[appMenu addItem: quitItem];
 	[quitItem release];
+
+	[pool release];
 }
 
 -(void)observeValueForKeyPath:(NSString *)path ofObject:(id)object
