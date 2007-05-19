@@ -233,6 +233,7 @@
 -(void)growlNotificationWasClicked:(id)clickContext
 {
     NSLog(@"Hey!  Someone clicked on the notification:  %@", clickContext);
+	[[NSWorkspace sharedWorkspace] launchApplication:clickContext];
 }
 
 @end
