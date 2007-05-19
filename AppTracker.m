@@ -38,6 +38,15 @@
 	[self willChangeValueForKey:@"currentApps"];
 	id anAppDict=[notification userInfo];
 
+	[GrowlApplicationBridge
+        notifyWithTitle:[NSString stringWithFormat: @"Launched %@", [anAppDict valueForKey:@"NSApplicationName"]]
+        description:[NSString stringWithFormat: @"Detected launch of %@", [anAppDict valueForKey:@"NSApplicationPath"]]
+        notificationName:@"AppLaunched"
+        iconData:[[[NSWorkspace sharedWorkspace] iconForFile: [anAppDict objectForKey:@"NSApplicationPath"]] TIFFRepresentation]
+        priority:0
+        isSticky:NO
+        clickContext:nil];
+
 	[currentApps setObject:anAppDict forKey:[anAppDict valueForKey:@"NSApplicationPath"]];
 	NSDate *now=[[NSDate alloc] init];
 	[activityTimes setObject:now forKey:[anAppDict valueForKey:@"NSApplicationPath"]];
@@ -50,6 +59,15 @@
 -(void)appQuit:(NSNotification*)notification {
 	[self willChangeValueForKey:@"currentApps"];
 	id anAppDict=[notification userInfo];
+
+	[GrowlApplicationBridge
+        notifyWithTitle:[NSString stringWithFormat: @"Quit %@", [anAppDict valueForKey:@"NSApplicationName"]]
+        description:[NSString stringWithFormat: @"Detected quit of %@", [anAppDict valueForKey:@"NSApplicationPath"]]
+        notificationName:@"AppQuit"
+        iconData:[[[NSWorkspace sharedWorkspace] iconForFile: [anAppDict objectForKey:@"NSApplicationPath"]] TIFFRepresentation]
+        priority:0
+        isSticky:NO
+        clickContext:nil];
 
 	[currentApps removeObjectForKey:[anAppDict valueForKey:@"NSApplicationPath"]];
 	[activityTimes removeObjectForKey:[anAppDict valueForKey:@"NSApplicationPath"]];
@@ -88,7 +106,7 @@
     NSLog(@"Hiding app (%@ growl)...", (isGrowlReady?@"with":@"without"));
     [GrowlApplicationBridge
         notifyWithTitle:[NSString stringWithFormat: @"Hiding %@", name]
-        description:[NSString stringWithFormat: @"Hidding application %@", name]
+        description:[NSString stringWithFormat: @"Hiding application %@", name]
         notificationName:@"Hiding"
         iconData:[[[NSWorkspace sharedWorkspace] iconForFile: [app objectForKey:@"NSApplicationPath"]] TIFFRepresentation]
         priority:0
@@ -108,6 +126,15 @@
 
 -(void)checkIdleApps:(NSTimer*)timer {
 	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
+
+    [GrowlApplicationBridge
+        notifyWithTitle:@"Checking for Idle Apps"
+        description:@"Looking around for idle apps."
+        notificationName:@"CheckingIdle"
+        iconData:nil
+        priority:0
+        isSticky:NO
+        clickContext:nil];
 
 	double maxAge=(double)[[NSUserDefaults standardUserDefaults] floatForKey:@"freq"];
 	NSEnumerator *enumerator = [activityTimes keyEnumerator];
@@ -175,7 +202,7 @@
     NSLog(@"Growl wants to know what kinda stuff we do.");
 
     NSArray *allNotifications=[[NSArray alloc] initWithObjects:
-        @"Hiding", @"AppLaunched", @"CheckingIdle", nil];
+        @"Hiding", @"AppLaunched", @"AppQuit", @"CheckingIdle", nil];
     NSArray *defaultNotifications=[[NSArray alloc] initWithObjects:
         @"Hiding", nil];
 
