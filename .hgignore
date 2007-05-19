@@ -1,4 +1,5 @@
 ^build/
+^Growl-WithInstaller.framework/
 
 syntax: glob
 *.mode1

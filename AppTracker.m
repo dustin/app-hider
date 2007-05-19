@@ -84,7 +84,17 @@
 	[pool release];
 }
 
--(void)hideApp:(NSDictionary*)app {
+-(void)hideApp:(NSDictionary*)app name:(NSString *)name {
+    NSLog(@"Hiding app (%@ growl)...", (isGrowlReady?@"with":@"without"));
+    [GrowlApplicationBridge
+        notifyWithTitle:[NSString stringWithFormat: @"Hiding %@", name]
+        description:[NSString stringWithFormat: @"Hidding application %@", name]
+        notificationName:@"Hiding"
+        iconData:[[[NSWorkspace sharedWorkspace] iconForFile: [app objectForKey:@"NSApplicationPath"]] TIFFRepresentation]
+        priority:0
+        isSticky:NO
+        clickContext:name];
+
 	NSAppleScript *script=[[NSAppleScript alloc] initWithSource:
 		[NSString stringWithFormat:@"tell application \"System Events\" to set visible of process id %@ to false",
 			[app valueForKey:@"NSApplicationProcessSerialNumberLow"]]];
@@ -110,7 +120,7 @@
 			if([lastUpdate timeIntervalSinceNow] + maxAge < 0
 				&& ![ignored containsObject: [app valueForKey:@"NSApplicationPath"]]) {
 				NSLog(@"Hiding %@", nm);
-				[self hideApp: app];
+				[self hideApp: app name:nm];
 				// Take it out of the list we're enumerating
 				[activityTimes removeObjectForKey:nm];
 			}
@@ -149,12 +159,53 @@
 	ignored = [[NSMutableSet alloc] initWithCapacity:100];
 	[ignored addObjectsFromArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"ignored"]];
 
+    // Setup growl delegation
+    [GrowlApplicationBridge setGrowlDelegate:self];
+
 	[self initAppList];
 
 	[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(checkCurrentApp:)
 		userInfo:nil repeats:YES];
 	[NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(checkIdleApps:)
 		userInfo:nil repeats:YES];
+}
+
+- (NSDictionary *) registrationDictionaryForGrowl
+{
+    NSLog(@"Growl wants to know what kinda stuff we do.");
+
+    NSArray *allNotifications=[[NSArray alloc] initWithObjects:
+        @"Hiding", @"AppLaunched", @"CheckingIdle", nil];
+    NSArray *defaultNotifications=[[NSArray alloc] initWithObjects:
+        @"Hiding", nil];
+
+    NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:
+        allNotifications, GROWL_NOTIFICATIONS_ALL,
+        defaultNotifications, GROWL_NOTIFICATIONS_DEFAULT,
+        nil];
+
+    NSLog(@"Telling it %@", dict);
+
+    [allNotifications release];
+    [defaultNotifications release];
+    [dict autorelease];
+    return(dict);
+}
+
+-(void)growlIsReady
+{
+    NSLog(@"growl is ready");
+    isGrowlReady=YES;
+}
+
+-(NSString *)applicationNameForGrowl
+{
+    return(@"AppHider");
+}
+
+-(void)growlNotificationWasClicked:(id)clickContext
+{
+    NSLog(@"Hey!  Someone clicked on the notification:  %@", clickContext);
 }
 
 @end

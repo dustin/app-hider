@@ -7,15 +7,17 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "Growl-WithInstaller/GrowlApplicationBridge.h"
 
-
-@interface AppTracker : NSObject {
+@interface AppTracker : NSObject <GrowlApplicationBridgeDelegate> {
 
 	NSArray *currentAppsArray;
 	NSMutableDictionary *currentApps;
 	NSMutableDictionary *activityTimes;
 
 	NSMutableSet *ignored;
+
+	BOOL isGrowlReady;
 }
 
 -(NSArray*)currentApps;
