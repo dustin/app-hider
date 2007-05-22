@@ -19,7 +19,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.2</string>
+	<string>1.2.1</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
@@ -28,6 +28,8 @@
 	<string>1</string>
 	<key>SUFeedURL</key>
 	<string>http://public.west.spy.net/app/apphider.xml</string>
+	<key>SUScheduledCheckInterval</key>
+	<string>7200</string>
 
 </dict>
 </plist>
