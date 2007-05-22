@@ -11,6 +11,17 @@
 		<description>Recent changes to Apphider.</description>
 		<language>en</language>
 		<item>
+			<title>Version 1.2</title>
+			<description>
+				This release officially supports
+				<a href="http://sparkle.artworkapp.com/">sparkle</a> for software
+				updates.
+			</description>
+			<pubDate>Tue, 22 May 2007 21:19:05 +0000</pubDate>
+			<enclosure url="http://public.west.spy.net/app/AppHider_1.2.zip"
+				length="x" type="application/octet-stream"/>
+		</item>
+		<item>
 			<title>Version 1.2rc1</title>
 			<description>Now with significantly more sparkle.</description>
 			<pubDate>Tue, 22 May 2007 21:11:31 +0000</pubDate>
