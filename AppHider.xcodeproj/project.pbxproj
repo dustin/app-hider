@@ -13,20 +13,34 @@
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		DA1B352A0B86EC4500E2D853 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = DA1B35280B86EC4500E2D853 /* Credits.html */; };
 		DA2439D60B86D597007A594A /* AppTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2439D50B86D597007A594A /* AppTracker.m */; };
+		DA4F15930C038E6300328372 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4F15920C038E6300328372 /* Sparkle.framework */; };
+		DA4F15B10C038E9800328372 /* Sparkle.framework in Add Sparkle */ = {isa = PBXBuildFile; fileRef = DA4F15920C038E6300328372 /* Sparkle.framework */; };
 		DA57583E0B863613000D83CD /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = DA57583D0B863613000D83CD /* Controller.m */; };
 		DA8E880D0BFF8929004BDBB7 /* Growl-WithInstaller.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA8E880C0BFF8929004BDBB7 /* Growl-WithInstaller.framework */; };
-		DA8E88650BFF8CCC004BDBB7 /* Growl-WithInstaller.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DA8E880C0BFF8929004BDBB7 /* Growl-WithInstaller.framework */; };
+		DA8E88650BFF8CCC004BDBB7 /* Growl-WithInstaller.framework in Add Growl */ = {isa = PBXBuildFile; fileRef = DA8E880C0BFF8929004BDBB7 /* Growl-WithInstaller.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		DA8E88620BFF8CA7004BDBB7 /* CopyFiles */ = {
+		DA4F15AA0C038E7C00328372 /* Add Sparkle */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				DA8E88650BFF8CCC004BDBB7 /* Growl-WithInstaller.framework in CopyFiles */,
+				DA4F15B10C038E9800328372 /* Sparkle.framework in Add Sparkle */,
 			);
+			name = "Add Sparkle";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA8E88620BFF8CA7004BDBB7 /* Add Growl */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DA8E88650BFF8CCC004BDBB7 /* Growl-WithInstaller.framework in Add Growl */,
+			);
+			name = "Add Growl";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -45,6 +59,7 @@
 		DA1B35290B86EC4500E2D853 /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.html; name = English; path = English.lproj/Credits.html; sourceTree = "<group>"; };
 		DA2439D40B86D597007A594A /* AppTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppTracker.h; sourceTree = "<group>"; };
 		DA2439D50B86D597007A594A /* AppTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppTracker.m; sourceTree = "<group>"; };
+		DA4F15920C038E6300328372 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		DA57583C0B863613000D83CD /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
 		DA57583D0B863613000D83CD /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Controller.m; sourceTree = "<group>"; };
 		DA8E880C0BFF8929004BDBB7 /* Growl-WithInstaller.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "Growl-WithInstaller.framework"; sourceTree = "<group>"; };
@@ -57,6 +72,7 @@
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				DA8E880D0BFF8929004BDBB7 /* Growl-WithInstaller.framework in Frameworks */,
+				DA4F15930C038E6300328372 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +93,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DA4F15920C038E6300328372 /* Sparkle.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
 			name = "Linked Frameworks";
@@ -152,7 +169,8 @@
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
-				DA8E88620BFF8CA7004BDBB7 /* CopyFiles */,
+				DA8E88620BFF8CA7004BDBB7 /* Add Growl */,
+				DA4F15AA0C038E7C00328372 /* Add Sparkle */,
 			);
 			buildRules = (
 			);
@@ -240,8 +258,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
@@ -264,8 +284,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
 				INFOPLIST_FILE = Info.plist;

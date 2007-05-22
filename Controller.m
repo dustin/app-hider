@@ -8,7 +8,6 @@
 
 #import "Controller.h"
 
-
 @implementation Controller
 
 -(void)toggleItem:(id)sender {
@@ -91,6 +90,15 @@
 	[prefsItem setEnabled:YES];
 	[appMenu addItem: prefsItem];
 	[prefsItem release];
+
+	// Check for updates
+	NSMenuItem *checkForUpdatesItem=[[NSMenuItem alloc]
+		initWithTitle: @"Check for Updates"
+		action:@selector(checkForUpdates:) keyEquivalent:@""];
+	[checkForUpdatesItem setTarget: sparkleUpdater];
+	[checkForUpdatesItem setEnabled:YES];
+	[appMenu addItem: checkForUpdatesItem];
+	[checkForUpdatesItem release];
 
 	// Quit 
 	NSMenuItem *quitItem=[[NSMenuItem alloc]

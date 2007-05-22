@@ -4,10 +4,21 @@
         {
             CLASS = Controller; 
             LANGUAGE = ObjC; 
-            OUTLETS = {appMenu = NSMenu; prefs = NSPanel; tracker = AppTracker; }; 
+            OUTLETS = {
+                appMenu = NSMenu; 
+                prefs = NSPanel; 
+                sparkleUpdater = SUUpdater; 
+                tracker = AppTracker; 
+            }; 
             SUPERCLASS = NSObject; 
         }, 
-        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {checkForUpdates = id; }; 
+            CLASS = SUUpdater; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }
     ); 
     IBVersion = 1; 
 }

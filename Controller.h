@@ -9,12 +9,15 @@
 #import <Cocoa/Cocoa.h>
 #import <AppTracker.h>
 
+#import "Sparkle/SUUPdater.h"
+
 @interface Controller : NSObject {
 
 	IBOutlet NSMenu *appMenu;
 	IBOutlet NSPanel *prefs;
 
 	IBOutlet AppTracker *tracker;
+	IBOutlet SUUpdater *sparkleUpdater;
 }
 
 @end

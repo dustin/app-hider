@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<!-- Copyright (c) 2007  Dustin Sallings (dustin@spy.net) -->
+
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"> 
+
+	<channel>
+		<title>Updates for AppHider</title>
+		<link>http://public.west.spy.net/app/apphider.xml</link>
+		<description>Recent changes to Apphider.</description>
+		<language>en</language>
+		<item>
+			<title>Version 1.2rc1</title>
+			<description>Now with significantly more sparkle.</description>
+			<pubDate>Tue, 22 May 2007 21:11:31 +0000</pubDate>
+			<enclosure url="http://public.west.spy.net/app/AppHider_1.2rc1.zip"
+				length="1" type="application/octet-stream"/>
+		</item>
+	</channel>
+</rss>
