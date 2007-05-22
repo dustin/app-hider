@@ -11,6 +11,24 @@
 		<description>Recent changes to Apphider.</description>
 		<language>en</language>
 		<item>
+			<title>Version 1.2.1</title>
+			<description>
+				&lt;p>
+					I figured it'd be a good idea to have checks automatically scheduled
+					to run periodically since this app should basically always be
+					running.
+				&lt;/p>
+				&lt;p>
+					In the meantime, checks are hard-coded to once every two hours.  At
+					some point I make a preference for this.  Luckily, you'll get it
+					automatically since it's scheduled to update itself.
+				&lt;/p>
+			</description>
+			<pubDate>Tue, 22 May 2007 21:44:45 +0000</pubDate>
+			<enclosure url="http://public.west.spy.net/app/AppHider_1.2.1.zip"
+				length="1796079" type="application/octet-stream"/>
+		</item>
+		<item>
 			<title>Version 1.2</title>
 			<description>
 				This release officially supports
