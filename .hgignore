@@ -1,5 +1,7 @@
 ^build/
 ^Growl-WithInstaller.framework/
+^Sparkle.framework/
+^._Sparkle.framework
 
 syntax: glob
 *.mode1
