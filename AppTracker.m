@@ -199,8 +199,6 @@
 
 - (NSDictionary *) registrationDictionaryForGrowl
 {
-    NSLog(@"Growl wants to know what kinda stuff we do.");
-
     NSArray *allNotifications=[[NSArray alloc] initWithObjects:
         @"Hiding", @"AppLaunched", @"AppQuit", @"CheckingIdle", nil];
     NSArray *defaultNotifications=[[NSArray alloc] initWithObjects:
@@ -210,8 +208,6 @@
         allNotifications, GROWL_NOTIFICATIONS_ALL,
         defaultNotifications, GROWL_NOTIFICATIONS_DEFAULT,
         nil];
-
-    NSLog(@"Telling it %@", dict);
 
     [allNotifications release];
     [defaultNotifications release];
