@@ -16,8 +16,6 @@
 	NSMutableDictionary *activityTimes;
 
 	NSMutableSet *ignored;
-
-	BOOL isGrowlReady;
 }
 
 -(NSArray*)currentApps;

@@ -119,12 +119,12 @@
 }
 
 -(void)initStatusBar {
-	NSStatusItem *newItem=[[NSStatusBar systemStatusBar] statusItemWithLength: 40.0];
-	[newItem setTitle: @"hide"];
-	[newItem setMenu: appMenu];
-	[newItem setEnabled:YES];
-	[newItem setHighlightMode:YES];
-	[newItem retain];
+	statusItem=[[NSStatusBar systemStatusBar] statusItemWithLength: 40.0];
+	[statusItem setTitle: @"hide"];
+	[statusItem setMenu: appMenu];
+	[statusItem setEnabled:YES];
+	[statusItem setHighlightMode:YES];
+	[statusItem retain];
 }
 
 -(void)setDefaultDefaults {

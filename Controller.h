@@ -16,6 +16,8 @@
 	IBOutlet NSMenu *appMenu;
 	IBOutlet NSPanel *prefs;
 
+	IBOutlet NSStatusItem *statusItem;
+
 	IBOutlet AppTracker *tracker;
 	IBOutlet SUUpdater *sparkleUpdater;
 }

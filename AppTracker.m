@@ -34,7 +34,16 @@
 	[arry release];
 }
 
+-(NSData *)getAppIcon:(NSString *)path {
+	NSImage *icon=[[NSWorkspace sharedWorkspace] iconForFile: path];
+	// This avoids a minor memory leak due to the image being cached.
+	[icon setCachedSeparately:YES];
+	[icon setCacheMode:NSImageCacheNever];
+	return [icon TIFFRepresentation];
+}
+
 -(void)appLaunched:(NSNotification*)notification {
+	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
 	[self willChangeValueForKey:@"currentApps"];
 	id anAppDict=[notification userInfo];
 
@@ -42,7 +51,7 @@
         notifyWithTitle:[NSString stringWithFormat: @"Launched %@", [anAppDict valueForKey:@"NSApplicationName"]]
         description:[NSString stringWithFormat: @"Detected launch of %@", [anAppDict valueForKey:@"NSApplicationPath"]]
         notificationName:@"AppLaunched"
-        iconData:[[[NSWorkspace sharedWorkspace] iconForFile: [anAppDict objectForKey:@"NSApplicationPath"]] TIFFRepresentation]
+        iconData:[self getAppIcon: [anAppDict objectForKey:@"NSApplicationPath"]]
         priority:0
         isSticky:NO
         clickContext:nil];
@@ -54,9 +63,11 @@
 
 	[self updateArray];
 	[self didChangeValueForKey:@"currentApps"];
+	[pool release];
 }
 
 -(void)appQuit:(NSNotification*)notification {
+	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
 	[self willChangeValueForKey:@"currentApps"];
 	id anAppDict=[notification userInfo];
 
@@ -64,7 +75,7 @@
         notifyWithTitle:[NSString stringWithFormat: @"Quit %@", [anAppDict valueForKey:@"NSApplicationName"]]
         description:[NSString stringWithFormat: @"Detected quit of %@", [anAppDict valueForKey:@"NSApplicationPath"]]
         notificationName:@"AppQuit"
-        iconData:[[[NSWorkspace sharedWorkspace] iconForFile: [anAppDict objectForKey:@"NSApplicationPath"]] TIFFRepresentation]
+        iconData:[self getAppIcon: [anAppDict objectForKey:@"NSApplicationPath"]]
         priority:0
         isSticky:NO
         clickContext:nil];
@@ -74,6 +85,7 @@
 
 	[self updateArray];
 	[self didChangeValueForKey:@"currentApps"];
+		[pool release];
 }
 
 -(void)initAppList {
@@ -103,12 +115,11 @@
 }
 
 -(void)hideApp:(NSDictionary*)app name:(NSString *)name {
-    NSLog(@"Hiding app (%@ growl)...", (isGrowlReady?@"with":@"without"));
     [GrowlApplicationBridge
         notifyWithTitle:[NSString stringWithFormat: @"Hiding %@", name]
         description:[NSString stringWithFormat: @"Hiding application %@", name]
         notificationName:@"Hiding"
-        iconData:[[[NSWorkspace sharedWorkspace] iconForFile: [app objectForKey:@"NSApplicationPath"]] TIFFRepresentation]
+        iconData:[self getAppIcon:[app objectForKey:@"NSApplicationPath"]]
         priority:0
         isSticky:NO
         clickContext:name];
@@ -181,6 +192,7 @@
 }
 
 -(void)awakeFromNib {
+	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
 	currentApps = [[NSMutableDictionary alloc] initWithCapacity:100];
 	activityTimes = [[NSMutableDictionary alloc] initWithCapacity:100];
 	ignored = [[NSMutableSet alloc] initWithCapacity:100];
@@ -195,10 +207,13 @@
 		userInfo:nil repeats:YES];
 	[NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(checkIdleApps:)
 		userInfo:nil repeats:YES];
+
+	[pool release];
 }
 
 - (NSDictionary *) registrationDictionaryForGrowl
 {
+	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
     NSArray *allNotifications=[[NSArray alloc] initWithObjects:
         @"Hiding", @"AppLaunched", @"AppQuit", @"CheckingIdle", nil];
     NSArray *defaultNotifications=[[NSArray alloc] initWithObjects:
@@ -211,14 +226,12 @@
 
     [allNotifications release];
     [defaultNotifications release];
+
+	// Autorelease everything that was built to be autoreleased
+	[pool release];
+	// This is the return value, so need to set it up for autorelease after releasing the pool
     [dict autorelease];
     return(dict);
-}
-
--(void)growlIsReady
-{
-    NSLog(@"growl is ready");
-    isGrowlReady=YES;
 }
 
 -(NSString *)applicationNameForGrowl
