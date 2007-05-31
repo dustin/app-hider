@@ -78,7 +78,7 @@
         iconData:[self getAppIcon: [anAppDict objectForKey:@"NSApplicationPath"]]
         priority:0
         isSticky:NO
-        clickContext:nil];
+        clickContext:[anAppDict objectForKey:@"NSApplicationPath"]];
 
 	[currentApps removeObjectForKey:[anAppDict valueForKey:@"NSApplicationPath"]];
 	[activityTimes removeObjectForKey:[anAppDict valueForKey:@"NSApplicationPath"]];
