@@ -11,6 +11,25 @@
 		<description>Recent changes to Apphider.</description>
 		<language>en</language>
 		<item>
+			<title>Version 1.2.3</title>
+			<description>
+				&lt;p>
+					Applications may now be relaunched from the &lt;q>app quit&lt;/q>
+					growl notification.
+				&lt;/p>
+				&lt;p>
+					This notification isn't delivered by default, but I've been using it
+					just to have more stuff scrolling about my screen.  After
+					accidentally closing an application today and having it point out
+					that I'd done so, it seemed like an obvious enhancement.
+				&lt;/p>
+			</description>
+			<!-- date -u +"%a, %d %b %Y %H:%M:%S GMT" -->
+			<pubDate>Thu, 31 May 2007 07:50:34 GMT</pubDate>
+			<enclosure url="http://public.west.spy.net/app/AppHider_1.2.3.zip"
+				length="1796113" type="application/octet-stream"/>
+		</item>
+		<item>
 			<title>Version 1.2.2</title>
 			<description>
 				&lt;p>
@@ -23,7 +42,6 @@
 					Probably should've tried that once before letting anyone see this.
 				&lt;/p>
 			</description>
-			<!-- date +"%a, %d %b %Y %H:%M:%S GMT" -->
 			<pubDate>Wed, 23 May 2007 15:50:13 GMT</pubDate>
 			<enclosure url="http://public.west.spy.net/app/AppHider_1.2.2.zip"
 				length="1796200" type="application/octet-stream"/>
