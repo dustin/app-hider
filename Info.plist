@@ -29,7 +29,7 @@
 	<key>SUFeedURL</key>
 	<string>http://public.west.spy.net/app/apphider.xml</string>
 	<key>SUScheduledCheckInterval</key>
-	<integer>7200</integer>
+	<integer>86400</integer>
 
 </dict>
 </plist>
