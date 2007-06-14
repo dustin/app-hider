@@ -126,7 +126,7 @@
 	[defaults addSuiteNamed:@"loginwindow"];
 
 	[myDict setObject:[NSNumber numberWithBool:NO] forKey:@"Hide"];
-	[myDict setObject:[[NSBundle mainBundle] executablePath]
+	[myDict setObject:[[NSBundle mainBundle] bundlePath]
 		forKey:@"Path"];
 
 	NSMutableArray *loginItems=[[[defaults
