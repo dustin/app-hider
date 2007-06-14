@@ -118,6 +118,38 @@
 	[self rebuildMenu];
 }
 
+// XXX:  I need to make this be able to add or remove, and validate the current user wishes.
+-(void)addToLoginItems {
+	NSMutableDictionary * myDict=[[NSMutableDictionary alloc] init];
+	NSUserDefaults * defaults = [[NSUserDefaults alloc] init];
+
+	[defaults addSuiteNamed:@"loginwindow"];
+
+	[myDict setObject:[NSNumber numberWithBool:NO] forKey:@"Hide"];
+	[myDict setObject:[[NSBundle mainBundle] executablePath]
+		forKey:@"Path"];
+
+	NSMutableArray *loginItems=[[[defaults
+		persistentDomainForName:@"loginwindow"]
+		objectForKey:@"AutoLaunchedApplicationDictionary"] mutableCopy];
+
+	[loginItems removeObject:myDict];
+
+	[loginItems addObject:myDict];
+	[defaults removeObjectForKey:@"AutoLaunchedApplicationDictionary"];
+	[defaults setObject:loginItems forKey:
+		@"AutoLaunchedApplicationDictionary"];
+
+	// Use the corefoundation API since I can't figure out the other one.
+	CFPreferencesSetValue((CFStringRef)@"AutoLaunchedApplicationDictionary",
+		loginItems, (CFStringRef)@"loginwindow", kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+	CFPreferencesSynchronize((CFStringRef) @"loginwindow", kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+
+	[defaults release];
+	[myDict release];
+	[loginItems release];
+}
+
 -(void)initStatusBar {
 	statusItem=[[NSStatusBar systemStatusBar] statusItemWithLength: 40.0];
 	[statusItem setTitle: @"hide"];
@@ -140,6 +172,8 @@
 
 -(void)awakeFromNib {
 	[self setDefaultDefaults];
+	// XXX:  It'd be nice to ask.
+	[self addToLoginItems];
 
 	[tracker addObserver:self forKeyPath:@"currentApps"
 		options:NSKeyValueObservingOptionNew context:nil];
