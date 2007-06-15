@@ -160,6 +160,7 @@
 
 	[defaults addSuiteNamed:@"loginwindow"];
 
+	NSLog(@"Adding login item: %@", [[NSBundle mainBundle] bundlePath]);
 	[myDict setObject:[NSNumber numberWithBool:NO] forKey:@"Hide"];
 	[myDict setObject:[[NSBundle mainBundle] bundlePath]
 		forKey:@"Path"];
@@ -181,6 +182,14 @@
 	[defaults release];
 	[myDict release];
 	[loginItems release];
+}
+
+-(IBAction)changeLoginItems:(id)sender {
+	if([sender state] == NSOnState) {
+		[self addToLoginItems:self];
+	} else {
+		[self removeLoginItem:self];
+	}
 }
 
 -(void)initStatusBar {
@@ -210,6 +219,8 @@
 		[self addToLoginItems: self];
 		[[NSUserDefaults standardUserDefaults]
 			setBool:YES	forKey:@"hasSetInitialLoginItem"];
+		[[NSUserDefaults standardUserDefaults]
+			setBool:YES	forKey:@"AddToLoginItems"];
 	}
 
 	[tracker addObserver:self forKeyPath:@"currentApps"

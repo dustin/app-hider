@@ -2,12 +2,14 @@
     IBClasses = (
         {CLASS = AppTracker; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
+            ACTIONS = {changeLoginItems = id; }; 
             CLASS = Controller; 
             LANGUAGE = ObjC; 
             OUTLETS = {
                 appMenu = NSMenu; 
                 prefs = NSPanel; 
                 sparkleUpdater = SUUpdater; 
+                statusItem = NSStatusItem; 
                 tracker = AppTracker; 
             }; 
             SUPERCLASS = NSObject; 

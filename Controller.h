@@ -22,4 +22,6 @@
 	IBOutlet SUUpdater *sparkleUpdater;
 }
 
+-(IBAction)changeLoginItems:(id)sender;
+
 @end
