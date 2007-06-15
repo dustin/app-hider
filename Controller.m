@@ -118,8 +118,43 @@
 	[self rebuildMenu];
 }
 
+-(void) removeLoginItem:(id)sender {
+	NSUserDefaults * defaults = [[NSUserDefaults alloc] init];
+
+	[defaults addSuiteNamed:@"loginwindow"];
+
+	NSMutableArray *loginItems=[[[defaults
+		persistentDomainForName:@"loginwindow"]
+		objectForKey:@"AutoLaunchedApplicationDictionary"] mutableCopy];
+
+	// Remove anything that looks like the current login item.
+	NSString *myName=[[[NSBundle mainBundle] bundlePath] lastPathComponent];
+	NSEnumerator *e=[loginItems objectEnumerator];
+	id current=nil;
+	while( (current=[e nextObject]) != nil) {
+		if([[current valueForKey:@"Path"] hasSuffix:myName]) {
+			NSLog(@"Removing login item: %@", [current valueForKey:@"Path"]);
+			[loginItems removeObject:current];
+		}
+	}
+
+	[defaults removeObjectForKey:@"AutoLaunchedApplicationDictionary"];
+	[defaults setObject:loginItems forKey:
+		@"AutoLaunchedApplicationDictionary"];
+
+	// Use the corefoundation API since I can't figure out the other one.
+	CFPreferencesSetValue((CFStringRef)@"AutoLaunchedApplicationDictionary",
+		loginItems, (CFStringRef)@"loginwindow", kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+	CFPreferencesSynchronize((CFStringRef) @"loginwindow", kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+
+	[defaults release];
+}
+
 // XXX:  I need to make this be able to add or remove, and validate the current user wishes.
--(void)addToLoginItems {
+-(void)addToLoginItems:(id)sender {
+
+	[self removeLoginItem: self];
+
 	NSMutableDictionary * myDict=[[NSMutableDictionary alloc] init];
 	NSUserDefaults * defaults = [[NSUserDefaults alloc] init];
 
@@ -132,8 +167,6 @@
 	NSMutableArray *loginItems=[[[defaults
 		persistentDomainForName:@"loginwindow"]
 		objectForKey:@"AutoLaunchedApplicationDictionary"] mutableCopy];
-
-	[loginItems removeObject:myDict];
 
 	[loginItems addObject:myDict];
 	[defaults removeObjectForKey:@"AutoLaunchedApplicationDictionary"];
@@ -172,8 +205,12 @@
 
 -(void)awakeFromNib {
 	[self setDefaultDefaults];
-	// XXX:  It'd be nice to ask.
-	[self addToLoginItems];
+	if([[NSUserDefaults standardUserDefaults] valueForKey:@"hasSetInitialLoginItem"] == nil) {
+		NSLog(@"Setting initial login item.");
+		[self addToLoginItems: self];
+		[[NSUserDefaults standardUserDefaults]
+			setBool:YES	forKey:@"hasSetInitialLoginItem"];
+	}
 
 	[tracker addObserver:self forKeyPath:@"currentApps"
 		options:NSKeyValueObservingOptionNew context:nil];
