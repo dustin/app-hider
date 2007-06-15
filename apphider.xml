@@ -11,6 +11,25 @@
 		<description>Recent changes to Apphider.</description>
 		<language>en</language>
 		<item>
+			<title>Version 1.2.4</title>
+			<description>
+				&lt;p>
+					AppHider now manages login items for you so once you can get used to
+					it you can be sure that it'll always be there for you.
+				&lt;/p>
+				&lt;p>
+					By default, it will automatically add itself to login items the first
+					time it runs after having not tried.  After this, you can remove it
+					from login items either via AppHider preferences or system
+					preferences.
+				&lt;/p>
+			</description>
+			<!-- date -u +"%a, %d %b %Y %H:%M:%S GMT" -->
+			<pubDate>Fri, 15 Jun 2007 07:44:25 GMT</pubDate>
+			<enclosure url="http://public.west.spy.net/app/AppHider_1.2.4.zip"
+				length="1799648" type="application/octet-stream"/>
+		</item>
+		<item>
 			<title>Version 1.2.3</title>
 			<description>
 				&lt;p>
@@ -24,7 +43,6 @@
 					that I'd done so, it seemed like an obvious enhancement.
 				&lt;/p>
 			</description>
-			<!-- date -u +"%a, %d %b %Y %H:%M:%S GMT" -->
 			<pubDate>Thu, 31 May 2007 07:50:34 GMT</pubDate>
 			<enclosure url="http://public.west.spy.net/app/AppHider_1.2.3.zip"
 				length="1796113" type="application/octet-stream"/>
