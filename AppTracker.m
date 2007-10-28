@@ -35,11 +35,15 @@
 }
 
 -(NSData *)getAppIcon:(NSString *)path {
-	NSImage *icon=[[NSWorkspace sharedWorkspace] iconForFile: path];
-	// This avoids a minor memory leak due to the image being cached.
-	[icon setCachedSeparately:YES];
-	[icon setCacheMode:NSImageCacheNever];
-	return [icon TIFFRepresentation];
+	NSData *rv=nil;
+	if(path != nil) {
+		NSImage *icon=[[NSWorkspace sharedWorkspace] iconForFile: path];
+		// This avoids a minor memory leak due to the image being cached.
+		[icon setCachedSeparately:YES];
+		[icon setCacheMode:NSImageCacheNever];
+		rv=[icon TIFFRepresentation];
+	}
+	return rv;
 }
 
 -(void)appLaunched:(NSNotification*)notification {
