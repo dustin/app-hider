@@ -11,13 +11,30 @@
 		<description>Recent changes to Apphider.</description>
 		<language>en</language>
 		<item>
+			<title>Version 1.2.6</title>
+			<description>
+				&lt;p>
+					Some minor performance enhancements and a growl update.  Mostly just
+					playing around with dtrace.
+				&lt;/p>
+				&lt;ul>
+					&lt;li>Updated Growl&lt;/li>
+					&lt;li>Disabled growl notification for polling&lt;/li>
+					&lt;li>Reduce system calls by remembering &lt;/li>
+				&lt;/ul>
+			</description>
+			<!-- date -u +"%a, %d %b %Y %H:%M:%S GMT" -->
+			<pubDate>Tue, 06 Nov 2007 21:55:54 GMT</pubDate>
+			<enclosure url="http://public.west.spy.net/app/AppHider_1.2.6.zip"
+				length="3333853" type="application/octet-stream"/>
+		</item>
+		<item>
 			<title>Version 1.2.5</title>
 			<description>
 				&lt;p>
 					Minor fix for something that was showing up in the logs under Leopard.
 				&lt;/p>
 			</description>
-			<!-- date -u +"%a, %d %b %Y %H:%M:%S GMT" -->
 			<pubDate>Sun, 28 Oct 2007 05:09:05 GMT</pubDate>
 			<enclosure url="http://public.west.spy.net/app/AppHider_1.2.5.zip"
 				length="1798007" type="application/octet-stream"/>
