@@ -142,15 +142,6 @@
 -(void)checkIdleApps:(NSTimer*)timer {
 	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
 
-    [GrowlApplicationBridge
-        notifyWithTitle:@"Checking for Idle Apps"
-        description:@"Looking around for idle apps."
-        notificationName:@"CheckingIdle"
-        iconData:nil
-        priority:0
-        isSticky:NO
-        clickContext:nil];
-
 	double maxAge=(double)[[NSUserDefaults standardUserDefaults] floatForKey:@"freq"];
 	NSEnumerator *enumerator = [activityTimes keyEnumerator];
     id nm;
@@ -219,7 +210,7 @@
 {
 	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
     NSArray *allNotifications=[[NSArray alloc] initWithObjects:
-        @"Hiding", @"AppLaunched", @"AppQuit", @"CheckingIdle", nil];
+        @"Hiding", @"AppLaunched", @"AppQuit", nil];
     NSArray *defaultNotifications=[[NSArray alloc] initWithObjects:
         @"Hiding", nil];
 
