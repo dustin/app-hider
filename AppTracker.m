@@ -142,7 +142,6 @@
 -(void)checkIdleApps:(NSTimer*)timer {
 	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
 
-	double maxAge=(double)[[NSUserDefaults standardUserDefaults] floatForKey:@"freq"];
 	NSEnumerator *enumerator = [activityTimes keyEnumerator];
     id nm;
 	while ((nm = [enumerator nextObject]) != nil) {
@@ -186,12 +185,24 @@
 	return [[[currentAppsArray objectAtIndex: idx] retain] autorelease];
 }
 
+-(void)observeValueForKeyPath:(NSString *)path ofObject:(id)object
+	change:(NSDictionary *)change context:(void*)context {
+	if([path isEqual:@"freq"]) {
+		maxAge=[[change objectForKey:NSKeyValueChangeNewKey] doubleValue];
+		NSLog(@"Max age is now %f", maxAge);
+	}
+}
+
 -(void)awakeFromNib {
 	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
 	currentApps = [[NSMutableDictionary alloc] initWithCapacity:100];
 	activityTimes = [[NSMutableDictionary alloc] initWithCapacity:100];
 	ignored = [[NSMutableSet alloc] initWithCapacity:100];
 	[ignored addObjectsFromArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"ignored"]];
+	maxAge=(double)[[NSUserDefaults standardUserDefaults] floatForKey:@"freq"];
+
+	[[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:@"freq"
+		options:NSKeyValueObservingOptionNew context:@"freq"];
 
     // Setup growl delegation
     [GrowlApplicationBridge setGrowlDelegate:self];

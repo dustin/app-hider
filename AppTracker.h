@@ -16,6 +16,7 @@
 	NSMutableDictionary *activityTimes;
 
 	NSMutableSet *ignored;
+	double maxAge;
 }
 
 -(NSArray*)currentApps;
